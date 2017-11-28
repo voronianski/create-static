@@ -1,14 +1,16 @@
-# Create Page CLI
+# Create client
 
-> Create small client side projects with ESNext, SCSS and Nunjucks easily.
+> Create clients with ESNext, SCSS and Nunjucks easily.
 
 ## Install
 
 ```bash
-npm i create-client-cli
+npm i create-client --save-dev
 ```
 
 ## Usage
+
+### CLI
 
 ```bash
 Usage: create-client -s ./path/to/src -o ./path/to/dist
@@ -20,9 +22,25 @@ Options:
   --version, -v  print version
 ```
 
+### Code
+
+```js
+const createClient = require('create-client');
+const source = './path/to/src';
+const output = './path/to/dist';
+
+createClient.run({ source, output })
+  .then(() => {
+    console.log('Success!');
+  })
+  .catch(err => {
+    console.log(err);
+  });
+```
+
 ### Source structure
 
-Every folder in source should have this structure but actually the only required file is `index.html`:
+Every folder in source folder should have following structure:
 
 ```bash
 .

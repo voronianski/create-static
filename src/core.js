@@ -8,6 +8,7 @@ const waterfall = require('async/waterfall');
 const parallelLimit = require('async/parallelLimit');
 const sass = require('node-sass');
 const nunjucks = require('nunjucks');
+const babelify = require('babelify');
 const browserify = require('browserify');
 const envify = require('envify/custom');
 
@@ -32,8 +33,9 @@ function run (opts = {}) {
         parseContent(p),
         compileCSS(p),
         compileJS(p),
+        copyAssets(p),
         renderTemplate(p),
-        outputHTML()
+        outputHTML(p)
       ];
 
       return done => {
@@ -70,6 +72,7 @@ function run (opts = {}) {
     function renderTemplate (p) {
       return (store, done) => {
         nunjucks.configure(p);
+
         const html = nunjucks.render('index.html', store);
 
         done(null, Object.assign(store, { html }));
@@ -124,20 +127,17 @@ function run (opts = {}) {
 
         const jsPath = './index.js';
         const fullJsPath = path.join(outputPath, env, store.slug, jsPath);
+        const presets = ['babel-preset-es2015', 'babel-preset-stage-0'].map(require.resolve);
 
         browserify(jsNextPath)
-          .transform('babelify', {
-            presets: ['es2015', 'stage-0']
-          })
-          .transform(envify({
-            NODE_ENV: env
-          }))
+          .transform(babelify, { presets })
+          .transform(envify({ NODE_ENV: env }))
           .bundle((err, buf) => {
             if (err) {
               return done(err);
             }
 
-            fs.outputFile(fullJsPath, buf.toString('utf-8'), (err) => {
+            fs.outputFile(fullJsPath, buf.toString('utf-8'), err => {
               if (err) {
                 return done(err);
               }
@@ -156,6 +156,28 @@ function run (opts = {}) {
         const htmlFilePath = path.join(outputPath, env, store.slug, './index.html');
 
         fs.outputFile(htmlFilePath, store.html, done);
+      };
+    }
+
+    function copyAssets (p) {
+      return (store, done) => {
+        const assetsFromPath = path.join(p, './assets');
+
+        if (!fs.existsSync(assetsFromPath)) {
+          return done(null, store);
+        }
+
+        const assetsToPath = path.join(outputPath, env, store.slug, './assets');
+
+        fs.copy(assetsFromPath, assetsToPath, err => {
+          if (err) {
+            return done(err);
+          }
+
+          done(null, Object.assign(store, {
+            assets: assetsToPath
+          }));
+        });
       };
     }
   });

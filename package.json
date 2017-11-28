@@ -1,8 +1,8 @@
 {
-  "name": "html-renderer",
+  "name": "create-client",
   "version": "1.0.0",
-  "description": "Create small client side projects with ESNext, SCSS and Nunjucks easily.",
-  "main": "./bin/cli.js",
+  "description": "Create clients with ESNext, SCSS and Nunjucks easily.",
+  "main": "./src/core.js",
   "scripts": {
     "lint": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 0"
@@ -10,10 +10,9 @@
   "bin": {
     "create-client": "./bin/cli.js"
   },
-  "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/voronianski/create-page-cli.git"
+    "url": "git+https://github.com/voronianski/create-client.git"
   },
   "dependencies": {
     "async": "^2.5.0",
@@ -46,9 +45,9 @@
   "author": "Dmitri Voronianski <dmitri.voronianski@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/voronianski/create-page-cli/issues"
+    "url": "https://github.com/voronianski/create-client/issues"
   },
-  "homepage": "https://github.com/voronianski/create-page-cli#readme",
+  "homepage": "https://github.com/voronianski/create-client#readme",
   "devDependencies": {
     "eslint": "^4.12.0"
   }
