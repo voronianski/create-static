@@ -31,6 +31,7 @@ function run (opts = {}) {
     const dirTasks = dirPaths.map(p => {
       const tasks = [
         parseContent(p),
+        parseOptionalConfig(p),
         compileCSS(p),
         compileJS(p),
         copyAssets(p),
@@ -101,7 +102,7 @@ function run (opts = {}) {
           }
 
           const cssPath = './index.css';
-          const fullCssPath = path.join(outputPath, env, store.slug, cssPath);
+          const fullCssPath = getOutputPath(store, cssPath);
 
           fs.outputFile(fullCssPath, result.css, (err) => {
             if (err) {
@@ -126,7 +127,7 @@ function run (opts = {}) {
         }
 
         const jsPath = './index.js';
-        const fullJsPath = path.join(outputPath, env, store.slug, jsPath);
+        const fullJsPath = getOutputPath(store, jsPath);
         const presets = ['babel-preset-es2015', 'babel-preset-stage-0'].map(require.resolve);
 
         browserify(jsNextPath)
@@ -153,7 +154,7 @@ function run (opts = {}) {
 
     function outputHTML () {
       return (store, done) => {
-        const htmlFilePath = path.join(outputPath, env, store.slug, './index.html');
+        const htmlFilePath = getOutputPath(store, './index.html');
 
         fs.outputFile(htmlFilePath, store.html, done);
       };
@@ -167,7 +168,7 @@ function run (opts = {}) {
           return done(null, store);
         }
 
-        const assetsToPath = path.join(outputPath, env, store.slug, './assets');
+        const assetsToPath = getOutputPath(store, './assets');
 
         fs.copy(assetsFromPath, assetsToPath, err => {
           if (err) {
@@ -179,6 +180,44 @@ function run (opts = {}) {
           }));
         });
       };
+    }
+
+    function parseOptionalConfig (p) {
+      return (store, done) => {
+        const yamlPath = path.join(p, './__config.yml');
+
+        if (!fs.existsSync(yamlPath)) {
+          return done(null, store);
+        }
+
+        let config;
+
+        try {
+          config = YAML.load(yamlPath);
+        } catch (err) {
+          done(err);
+        }
+
+        done(null, Object.assign(store, { __config: config }));
+      };
+    }
+
+    function getOutputPath (store, toPath) {
+      const cfg = store.__config;
+
+      if (cfg) {
+        const slug = cfg.slug || store.slug;
+        const parent = cfg.parent || '';
+
+        return path.join(outputPath, env, parent, slug, toPath);
+      } else {
+        return path.join(outputPath, env, store.slug, toPath);
+      }
+
+      // const fullCssPath = path.join(outputPath, env, store.slug, cssPath);
+      // const fullJsPath = path.join(outputPath, env, store.slug, jsPath);
+      // const htmlFilePath = path.join(outputPath, env, store.slug, './index.html');
+      // const assetsToPath = path.join(outputPath, env, store.slug, './assets');
     }
   });
 }

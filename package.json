@@ -1,6 +1,6 @@
 {
   "name": "create-static",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create static HTML pages with ESNext, SCSS and Nunjucks.",
   "main": "./src/core.js",
   "scripts": {
