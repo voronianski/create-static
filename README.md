@@ -25,11 +25,11 @@ Options:
 ### Code
 
 ```js
-const createClient = require('create-static');
+const createStatic = require('create-static');
 const source = './path/to/src';
 const output = './path/to/dist';
 
-createClient.run({ source, output })
+createStatic.run({ source, output })
   .then(() => {
     console.log('Success!');
   })
@@ -46,7 +46,7 @@ Every folder in source folder should have following structure:
 - `content.yml` - optional, data to render inside html
 - `index.js` - optional, javascript powered by [browserify](https://github.com/browserify/browserify) and [babelify](https://github.com/babel/babelify) (uses `es2015` and `stage-0` presets)
 - `indes.scss` - optional, css powered by [node-sass](https://github.com/sass/node-sass)
-- `assets` - optional, folder to store all static files, it will be copied into build
+- `assets` - optional folder to store all static files (it will be copied into build)
 
 ```bash
 .
