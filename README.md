@@ -1,11 +1,11 @@
-# Create client
+# create-static
 
-> Create clients with ESNext, SCSS and Nunjucks easily.
+> Create static html pages with ESNext, SCSS and Nunjucks.
 
 ## Install
 
 ```bash
-npm i create-client --save-dev
+npm i create-static --save-dev
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm i create-client --save-dev
 ### CLI
 
 ```bash
-Usage: create-client -s ./path/to/src -o ./path/to/dist
+Usage: create-static -s ./path/to/src -o ./path/to/dist
 
 Options:
   --source, -s   path to source folder containing all promo folders
@@ -25,7 +25,7 @@ Options:
 ### Code
 
 ```js
-const createClient = require('create-client');
+const createClient = require('create-static');
 const source = './path/to/src';
 const output = './path/to/dist';
 
@@ -70,7 +70,7 @@ Every folder in source folder should have following structure:
 ```
 
 ```bash
-create-client -s ./src -o ./dist
+create-static -s ./src -o ./dist
 # will output all ready to use files in `dist` folder
 ```
 

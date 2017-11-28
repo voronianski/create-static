@@ -1,18 +1,18 @@
 {
-  "name": "create-client",
+  "name": "create-static",
   "version": "1.0.0",
-  "description": "Create clients with ESNext, SCSS and Nunjucks easily.",
+  "description": "Create static HTML pages with ESNext, SCSS and Nunjucks.",
   "main": "./src/core.js",
   "scripts": {
     "lint": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "bin": {
-    "create-client": "./bin/cli.js"
+    "create-static": "./bin/cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/voronianski/create-client.git"
+    "url": "git+https://github.com/voronianski/create-static.git"
   },
   "dependencies": {
     "async": "^2.5.0",
@@ -45,9 +45,9 @@
   "author": "Dmitri Voronianski <dmitri.voronianski@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/voronianski/create-client/issues"
+    "url": "https://github.com/voronianski/create-static/issues"
   },
-  "homepage": "https://github.com/voronianski/create-client#readme",
+  "homepage": "https://github.com/voronianski/create-static#readme",
   "devDependencies": {
     "eslint": "^4.12.0"
   }
