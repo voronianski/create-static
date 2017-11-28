@@ -42,6 +42,12 @@ createClient.run({ source, output })
 
 Every folder in source folder should have following structure:
 
+- `index.html` - required, html powered by nunjucks template engine
+- `content.yml` - optional, data to render inside html
+- `index.js` - optional, javascript powered by [browserify](https://github.com/browserify/browserify) and [babelify](https://github.com/babel/babelify) (uses `es2015` and `stage-0` presets)
+- `indes.scss` - optional, css powered by [node-sass](https://github.com/sass/node-sass)
+- `assets` - optional, folder to store all static files, it will be copied into build
+
 ```bash
 .
 |____dist
@@ -51,6 +57,9 @@ Every folder in source folder should have following structure:
 | | |____index.js
 | | |____index.scss
 | |____page-2
+| | |____assets
+| | | |____icon.png
+| | | |____some-webfont.woff
 | | |____index.html # required
 | | |____index.scss
 | |____page-3
