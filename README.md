@@ -74,6 +74,64 @@ create-static -s ./src -o ./dist
 # will output all ready to use files in `dist` folder
 ```
 
+### Optional `__config.yml`
+
+There's also a small room for customisation powered by optional `__config.yml` file. It accepts 2 keys:
+
+```yaml
+parent: "parent" # folder that will store multiple builds
+slug: "/slug" # will replace original folder name
+```
+
+For example for this structure and configs:
+
+```bash
+.
+|____dist
+|____src
+| |____about-page
+| | |______config.yml
+| | |____index.html
+| |____contact-page
+| | |______config.yml
+| | |____index.html
+```
+
+```yaml
+# /src/about-page/__config.yml
+parent: "promo"
+slug: "/about"
+```
+
+```yaml
+# /src/contact-page/__config.yml
+parent: "promo"
+slug: "/contact"
+```
+
+```bash
+create-static -s ./src -o ./dist
+```
+
+It will output such build structure:
+
+```bash
+.
+|____dist
+| |____promo
+| | |____about
+| | | |____index.html
+| | |____contact
+| | | |____index.html
+|____src
+| |____about-page
+| | |______config.yml
+| | |____index.html
+| |____contact-page
+| | |______config.yml
+| | |____index.html
+```
+
 ---
 
 **MIT Licensed**
