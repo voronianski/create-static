@@ -16,7 +16,7 @@ npm i create-static --save-dev
 Usage: create-static -s ./path/to/src -o ./path/to/dist
 
 Options:
-  --source, -s   path to source folder containing all promo folders
+  --source, -s   path to source folder containing all page folders
   --output, -o   path to dist folder with resulted builds
   --help, -h     print help
   --version, -v  print version
