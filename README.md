@@ -87,7 +87,6 @@ For example for this structure and configs:
 
 ```bash
 .
-|____dist
 |____src
 | |____about-page
 | | |______config.yml
@@ -123,13 +122,6 @@ It will output such build structure:
 | | | |____index.html
 | | |____contact
 | | | |____index.html
-|____src
-| |____about-page
-| | |______config.yml
-| | |____index.html
-| |____contact-page
-| | |______config.yml
-| | |____index.html
 ```
 
 ---
