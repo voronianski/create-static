@@ -213,11 +213,6 @@ function run (opts = {}) {
       } else {
         return path.join(outputPath, env, store.slug, toPath);
       }
-
-      // const fullCssPath = path.join(outputPath, env, store.slug, cssPath);
-      // const fullJsPath = path.join(outputPath, env, store.slug, jsPath);
-      // const htmlFilePath = path.join(outputPath, env, store.slug, './index.html');
-      // const assetsToPath = path.join(outputPath, env, store.slug, './assets');
     }
   });
 }
