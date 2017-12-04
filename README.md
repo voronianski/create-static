@@ -40,7 +40,7 @@ createStatic.run({ source, output })
 
 ### Source structure
 
-Every folder in source folder should have following structure:
+Every folder inside source should have following structure:
 
 - `index.html` - required, html powered by nunjucks template engine
 - `content.yml` - optional, data to render inside html
