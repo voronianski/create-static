@@ -11,7 +11,7 @@ const optimist = require('optimist')
   .alias('output', 'o')
   .alias('help', 'h')
   .alias('version', 'v')
-  .describe('source', 'path to source folder containing all promo folders')
+  .describe('source', 'path to source folder containing all page folders')
   .describe('output', 'path to dist folder with resulted builds')
   .describe('help', 'print help')
   .describe('version', 'print version');
